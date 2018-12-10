@@ -1,0 +1,34 @@
+package io.github.corzdev.advancedHelp;
+
+import org.spongepowered.api.plugin.Plugin;
+import org.spongepowered.api.event.Listener;
+import org.spongepowered.api.event.game.state.GameStartedServerEvent;
+import org.spongepowered.api.command.spec.CommandSpec;
+import org.spongepowered.api.text.Text;
+
+
+@Plugin(id = "advancedHelp", name = "Advanced Help", version = "0.1", description = "Sponge Plugin that allows for custimization of the /help command")
+
+public class AdvancedHelp {
+
+    @Inject
+    private Logger logger;
+
+    @Listener
+    public void onServerStart(GameStartedServerEvent event) {
+        logger.info("Successfully loaded AdvancedHelp!");
+    }
+
+    CommandSpec help = CommandSpec.builder()
+            .description(Text.of("Displays the help pages"))
+            .permission("advancedhelp.command.help")
+            .executor(new HelpCommand())
+            .build();
+
+    Sponge.getCommandManager().register(AdvancedHelp, help, "help");
+
+
+
+
+
+}
